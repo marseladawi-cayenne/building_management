@@ -1,0 +1,84 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{building} - {user}",
+ "creation": "2024-10-27 08:23:58.499182",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "building",
+  "user",
+  "role",
+  "apartment_number",
+  "customer"
+ ],
+ "fields": [
+  {
+   "fieldname": "building",
+   "fieldtype": "Link",
+   "label": "Building",
+   "options": "Building",
+   "table_modal_fields": "[]",
+   "table_type": "List"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "User",
+   "options": "User",
+   "quick_entry_entity": "User-0013",
+   "table_modal_fields": "[]",
+   "table_type": "List"
+  },
+  {
+   "default": "Tenant",
+   "fieldname": "role",
+   "fieldtype": "Select",
+   "label": "Role",
+   "options": "Tenant\nAdmin",
+   "table_modal_fields": "[]",
+   "table_type": "List"
+  },
+  {
+   "fieldname": "apartment_number",
+   "fieldtype": "Data",
+   "label": "Apartment Number",
+   "table_modal_fields": "[]",
+   "table_type": "List"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer",
+   "table_modal_fields": "[]",
+   "table_type": "List"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-11-03 17:36:21.868284",
+ "modified_by": "Administrator",
+ "module": "Building Management",
+ "name": "Building Member",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
