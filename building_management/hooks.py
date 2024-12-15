@@ -5,6 +5,11 @@ app_description = "Building Management Module"
 app_email = "info@cayenne-systems.com"
 app_license = "mit"
 
+scheduler_events = {
+    "monthly": [
+        "building_management.api.monthly_subscription"
+    ]
+}
 
 doc_events = {
     "Building": {

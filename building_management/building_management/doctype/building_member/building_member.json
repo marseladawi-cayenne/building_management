@@ -10,7 +10,8 @@
   "user",
   "role",
   "apartment_number",
-  "customer"
+  "customer",
+  "monthly_subscription"
  ],
  "fields": [
   {
@@ -54,11 +55,18 @@
    "options": "Customer",
    "table_modal_fields": "[]",
    "table_type": "List"
+  },
+  {
+   "fieldname": "monthly_subscription",
+   "fieldtype": "Float",
+   "label": "Monthly Subscription",
+   "table_modal_fields": "[]",
+   "table_type": "List"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-03 17:36:21.868284",
+ "modified": "2024-11-09 21:03:22.596071",
  "modified_by": "Administrator",
  "module": "Building Management",
  "name": "Building Member",

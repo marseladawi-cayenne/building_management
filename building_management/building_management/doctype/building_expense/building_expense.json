@@ -1,17 +1,45 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2024-10-27 08:27:40.155160",
+ "creation": "2024-11-17 13:31:15.323153",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "building",
-  "requested_by",
   "description",
-  "attachments",
+  "additional_info",
+  "payments",
+  "amount",
+  "paid_amount",
   "status"
  ],
  "fields": [
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description",
+   "table_modal_fields": "[]",
+   "table_type": "List",
+   "upload_privacy": "Private"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
+   "table_modal_fields": "[]",
+   "table_type": "List",
+   "upload_privacy": "Private"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nPaid\nCancelled",
+   "table_modal_fields": "[]",
+   "table_type": "List",
+   "upload_privacy": "Private"
+  },
   {
    "fieldname": "building",
    "fieldtype": "Link",
@@ -22,35 +50,26 @@
    "upload_privacy": "Private"
   },
   {
-   "fieldname": "requested_by",
-   "fieldtype": "Link",
-   "label": "Requested By",
-   "options": "User",
+   "fieldname": "paid_amount",
+   "fieldtype": "Currency",
+   "label": "Paid Amount",
    "table_modal_fields": "[]",
    "table_type": "List",
    "upload_privacy": "Private"
   },
   {
-   "fieldname": "description",
+   "fieldname": "additional_info",
    "fieldtype": "Text Editor",
-   "label": "Description",
+   "label": "Additional Info",
    "table_modal_fields": "[]",
    "table_type": "List",
    "upload_privacy": "Private"
   },
   {
-   "fieldname": "attachments",
-   "fieldtype": "Attach",
-   "label": "Attachments",
-   "table_modal_fields": "[]",
-   "table_type": "List",
-   "upload_privacy": "Private"
-  },
-  {
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "Pending\nIn Progress\nCompleted",
+   "fieldname": "payments",
+   "fieldtype": "Table",
+   "label": "Payments",
+   "options": "Payment List",
    "table_modal_fields": "[]",
    "table_type": "List",
    "upload_privacy": "Private"
@@ -58,10 +77,10 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-10 19:06:22.807952",
+ "modified": "2024-11-24 13:39:41.710081",
  "modified_by": "Administrator",
  "module": "Building Management",
- "name": "Maintenance Request",
+ "name": "Building Expense",
  "owner": "Administrator",
  "permissions": [
   {
@@ -75,22 +94,9 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Building User",
-   "share": 1,
-   "write": 1
   }
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
- "track_seen": 1
+ "states": []
 }
