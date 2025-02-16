@@ -8,10 +8,15 @@
  "field_order": [
   "building",
   "user",
+  "full_name",
   "role",
+  "floor_number",
   "apartment_number",
   "customer",
-  "monthly_subscription"
+  "monthly_subscription",
+  "mobile_no",
+  "outstanding_balance",
+  "car_pallet"
  ],
  "fields": [
   {
@@ -20,7 +25,8 @@
    "label": "Building",
    "options": "Building",
    "table_modal_fields": "[]",
-   "table_type": "List"
+   "table_type": "List",
+   "upload_privacy": "Private"
   },
   {
    "allow_in_quick_entry": 1,
@@ -30,7 +36,8 @@
    "options": "User",
    "quick_entry_entity": "User-0013",
    "table_modal_fields": "[]",
-   "table_type": "List"
+   "table_type": "List",
+   "upload_privacy": "Private"
   },
   {
    "default": "Tenant",
@@ -39,14 +46,16 @@
    "label": "Role",
    "options": "Tenant\nAdmin",
    "table_modal_fields": "[]",
-   "table_type": "List"
+   "table_type": "List",
+   "upload_privacy": "Private"
   },
   {
    "fieldname": "apartment_number",
    "fieldtype": "Data",
    "label": "Apartment Number",
    "table_modal_fields": "[]",
-   "table_type": "List"
+   "table_type": "List",
+   "upload_privacy": "Private"
   },
   {
    "fieldname": "customer",
@@ -54,19 +63,65 @@
    "label": "Customer",
    "options": "Customer",
    "table_modal_fields": "[]",
-   "table_type": "List"
+   "table_type": "List",
+   "upload_privacy": "Private"
   },
   {
    "fieldname": "monthly_subscription",
-   "fieldtype": "Float",
+   "fieldtype": "Currency",
    "label": "Monthly Subscription",
    "table_modal_fields": "[]",
-   "table_type": "List"
+   "table_type": "List",
+   "upload_privacy": "Private"
+  },
+  {
+   "fetch_from": "user.full_name",
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Name",
+   "set_only_once": 1,
+   "table_modal_fields": "[]",
+   "table_type": "List",
+   "upload_privacy": "Private"
+  },
+  {
+   "fieldname": "floor_number",
+   "fieldtype": "Int",
+   "label": "Floor Number",
+   "table_modal_fields": "[]",
+   "table_type": "List",
+   "upload_privacy": "Private"
+  },
+  {
+   "fieldname": "outstanding_balance",
+   "fieldtype": "Currency",
+   "label": "Balance",
+   "table_modal_fields": "[]",
+   "table_type": "List",
+   "upload_privacy": "Private"
+  },
+  {
+   "fetch_from": "user.mobile_no",
+   "fieldname": "mobile_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Mobile no",
+   "table_modal_fields": "[]",
+   "table_type": "List",
+   "upload_privacy": "Private"
+  },
+  {
+   "fieldname": "car_pallet",
+   "fieldtype": "Data",
+   "label": "Car Pallet",
+   "table_modal_fields": "[]",
+   "table_type": "List",
+   "upload_privacy": "Private"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-09 21:03:22.596071",
+ "modified": "2025-02-16 18:39:44.017968",
  "modified_by": "Administrator",
  "module": "Building Management",
  "name": "Building Member",

@@ -7,6 +7,7 @@
  "field_order": [
   "building",
   "requested_by",
+  "requested_by_full_name",
   "description",
   "attachments",
   "status"
@@ -25,6 +26,7 @@
    "fieldname": "requested_by",
    "fieldtype": "Link",
    "label": "Requested By",
+   "option_label": "full_name",
    "options": "User",
    "table_modal_fields": "[]",
    "table_type": "List",
@@ -47,6 +49,7 @@
    "upload_privacy": "Private"
   },
   {
+   "description": "Pending:light\nIn Progress:primary\nCompleted:success",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
@@ -54,11 +57,20 @@
    "table_modal_fields": "[]",
    "table_type": "List",
    "upload_privacy": "Private"
+  },
+  {
+   "fetch_from": "requested_by.full_name",
+   "fieldname": "requested_by_full_name",
+   "fieldtype": "Read Only",
+   "label": "Requested by Name",
+   "table_modal_fields": "[]",
+   "table_type": "List",
+   "upload_privacy": "Private"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-10 19:06:22.807952",
+ "modified": "2025-02-16 14:36:01.801191",
  "modified_by": "Administrator",
  "module": "Building Management",
  "name": "Maintenance Request",

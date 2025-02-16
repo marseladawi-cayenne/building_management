@@ -16,6 +16,6 @@ doc_events = {
         "after_insert": "building_management.api.building_on_create"
     },
     "Building Member": {
-        "after_insert": "building_management.api.building_member_on_create"
+        "before_insert": "building_management.api.building_member_on_create"
     }
 }

@@ -2,15 +2,21 @@ import frappe
 from datetime import datetime
 from frappe.desk.query_report import run
 from frappe.exceptions import ValidationError
+from frappe.core.doctype.sms_settings.sms_settings import send_via_gateway
+from frappe.auth import LoginManager
+import random
+
 
 def building_on_create(doc,method=None):
-    company_doc = frappe.new_doc("Company")
-    company_doc.company_name = doc.building_name
-    company_doc.country = "Palestinian Territory, Occupied"
-    company_doc.default_currency = "ILS"
-    company_doc.abbreviate()
-    company_doc.save(ignore_permissions=True)
-    company_doc = frappe.get_doc("Company", company_doc.name)
+    if len(frappe.get_list("Company", filters={'name':doc.building_name})) == 0:
+        company_doc = frappe.new_doc("Company")
+        company_doc.company_name = doc.building_name
+        company_doc.country = "Palestinian Territory, Occupied"
+        company_doc.default_currency = "ILS"
+        company_doc.abbreviate()
+        company_doc.save(ignore_permissions=True)
+        
+    company_doc = frappe.get_doc("Company", doc.building_name)
     pending_cash = frappe.new_doc("Account")
     pending_cash.account_name = "Pending Cash"
     pending_cash.company = company_doc.name
@@ -24,11 +30,23 @@ def building_on_create(doc,method=None):
     doc.save()
     
 def building_member_on_create(doc ,method=None):
+    #if user doesnt exist, create user
+    user = frappe.db.get_value("User", {"phone": doc.mobile_no}, "name")
+    if not user:
+        user_doc = frappe.new_doc("User")
+        user_doc.first_name = doc.full_name
+        user_doc.mobile_no = doc.mobile_no
+        user_doc.email = f"{doc.mobile_no}@lajneh.ps"
+        user_doc.append('roles',{'role':'Building User'})
+        user_doc.save()
+        doc.user = user_doc.name
+
+        
     customer_doc = frappe.new_doc("Customer")
-    customer_doc.customer_name = f"{doc.building}-{doc.user}"
+    user_doc = frappe.get_doc("User", doc.user)
+    customer_doc.customer_name = f"{doc.building}-{user_doc.full_name}"
     customer_doc.save()
     doc.customer = customer_doc.name
-    doc.save()
     user_permission = frappe.new_doc("User Permission")
     user_permission.user = doc.user
     user_permission.allow = "Company"
@@ -178,3 +196,39 @@ def add_building_member(user, building):
     frappe.db.commit()  # Save the Building Member
 
     return {"status": "success", "message": building_member}
+
+
+def send_otp_sms(phone_number, otp):
+  message_text = f"اهلا بكم في برنامج لجنة, كود الدخول الخاص بكم هو:{otp}."
+  send_via_gateway({'message': message_text, 'receiver_list':[phone_number]})
+
+@frappe.whitelist(allow_guest=True)
+def generate_otp(phone_number):
+  otp = random.randint(10000,99999)
+  sms_receiver = "+972" + str(phone_number)
+  frappe.cache().set(f"OTP:{phone_number}",otp, ex=300)
+  send_otp_sms(sms_receiver, otp)
+
+@frappe.whitelist(allow_guest=True)
+def check_otp(phone_number, otp):
+
+  stored_otp = frappe.cache().get(f"OTP:{phone_number}")
+  if stored_otp is None:
+    frappe.throw(title="Error", msg=("OTP not found"))    
+  else:
+    stored_otp = stored_otp.decode()
+  
+  if stored_otp != str(otp):
+    frappe.throw(title="Error", msg=("Invalid OTP: " + stored_otp))      
+  
+  user = frappe.db.get("User", {"mobile_no": phone_number})
+  if not user:
+    user = frappe.new_doc("User")
+    user.mobile_no = phone_number
+    user.email = f'{phone_number}@lajneh.ps'
+    user.first_name = 'temp_name'
+    user.save(ignore_permissions=True)
+    
+  frappe.cache().delete_key(f"OTP:{phone_number}")
+  login_manager = LoginManager()
+  login_manager.login_as(user.name)

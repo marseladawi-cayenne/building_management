@@ -6,6 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "building",
+  "type",
   "description",
   "additional_info",
   "payments",
@@ -73,11 +74,20 @@
    "table_modal_fields": "[]",
    "table_type": "List",
    "upload_privacy": "Private"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Link",
+   "label": "Type",
+   "options": "Expense Type",
+   "table_modal_fields": "[]",
+   "table_type": "List",
+   "upload_privacy": "Private"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-24 13:39:41.710081",
+ "modified": "2025-02-16 13:45:24.347318",
  "modified_by": "Administrator",
  "module": "Building Management",
  "name": "Building Expense",
